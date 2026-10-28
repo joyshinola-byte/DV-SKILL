@@ -1,43 +1,41 @@
-TASK 2
+**TASK 2**
 
-Retail Sales Visualization, Relationship Analysis & Business Insights
+**Retail Sales Visualization, Relationship Analysis & Business Insights**
 
-1. Project Overview
+**1. Project Overview**
 This project analyzes a retail sales dataset using Python and data visualization techniques. The main focus is to understand sales, profit, discount, product categories, and relationships between numerical variables.
 
-2. Libraries Used
+**2. Libraries Used**
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-
-Explanation
+**Explanation**
 Pandas is used for data loading and data analysis.
 NumPy is used for numerical operations.
 Matplotlib is used to create basic plots.
 Seaborn is used for statistical visualizations.
 
-4. Loading the Dataset
+**3. Loading the Dataset**
 df = pd.read_csv("/content/drive/MyDrive/big data analysis/samplesuperstore.csv")
 Explanation
 The Sample Superstore CSV file is loaded using Pandas and stored in the DataFrame df.
 
 The dataset contains 10,194 records and initially has 21 columns.
 
-4. Viewing the Dataset
+**4. Viewing the Dataset**
 df.head()
-
 Explanation
 head() displays the first five rows of the dataset. It helps understand the structure and type of information available.
 
 The dataset contains fields such as Order ID, Order Date, Ship Date, Customer information, Region, Category, Sales, Quantity, Discount, and Profit.
 
-5. Dataset Information
+**5. Dataset Information**
 df.info
 Explanation
 This is used to inspect the DataFrame information, including columns and data types.
 
-6. Descriptive Statistics
+**6. Descriptive Statistics**
 df.describe()
 Explanation
 describe() provides statistical information for numerical columns such as:
@@ -52,27 +50,27 @@ Median
 Maximum
 The average Sales is approximately 228.23 and the average Profit is approximately 28.67.
 
-7. Date Conversion
+**7. Date Conversion**
 df["Order Date"] = pd.to_datetime(df["Order Date"])
 df["Ship Date"] = pd.to_datetime(df["Ship Date"])
 Explanation
 The Order Date and Ship Date columns are converted into datetime format so that date-based calculations can be performed.
 
-8. Checking Data Types
+**8. Checking Data Types**
 df.dtypes
 Explanation
 This code displays the data type of every column.
 
 After conversion, Order Date and Ship Date are stored as datetime values, while Sales, Discount, and Profit are numerical values.
 
-9. Creating Delivery Days
+**9. Creating Delivery Days**
 df["Delivery Days"] = (df["Ship Date"] - df["Order Date"]).dt.days
 Explanation
 A new column called Delivery Days is created by calculating the number of days between the Order Date and Ship Date.
 
 This helps analyze delivery duration.
 
-10. Checking Product Categories
+**10. Checking Product Categories**
 print(df["Category"].unique())
 Output
 ['Office Supplies' 'Furniture' 'Technology']
@@ -84,7 +82,9 @@ The three categories are:
 Office Supplies
 Furniture
 Technology
-11. Checking Missing Values
+
+**11. Checking Missing Values**
+    
 print(df.isnull().sum())
 Explanation
 This checks the number of missing values in every column.
@@ -92,16 +92,20 @@ This checks the number of missing values in every column.
 The analysis shows that there are no missing values in the dataset.
 
 Part 1: Sales Analysis and Bar Plots
-12. Sales Distribution
+
+**12. Sales Distribution**
 plt.figure(figsize=(6,4))
 plt.hist(df["Sales"], bins=20)
 plt.title("Distribution of Sales")
 plt.xlabel("Sales")
 plt.ylabel("Frequency")
 plt.show()
-OUTPUT: image
 
-Explanation
+**OUTPUT:**
+<img width="558" height="393" alt="image" src="https://github.com/user-attachments/assets/74a7c887-6f09-419f-984d-c68bbdda70a8" />
+
+**Explanation**
+
 A histogram is used to understand how Sales values are distributed across the dataset.
 
 bins=20 divides the Sales values into 20 groups.
@@ -109,7 +113,7 @@ bins=20 divides the Sales values into 20 groups.
 Analysis
 This visualization helps understand the frequency and distribution of sales values.
 
-13. Total Sales by Category
+**13. Total Sales by Category**
 category_sales = df.groupby("Category")["Sales"].sum()
 print(category_sales)
 Explanation
@@ -122,22 +126,25 @@ Technology         839893.2790
 Analysis
 Technology has the highest total sales among the three categories.
 
-14. Sales by Category Bar Plot
+**14. Sales by Category Bar Plot**
 plt.figure(figsize=(6,4))
 plt.bar(category_sales.index, category_sales.values)
 plt.title("Sales by Category")
 plt.xlabel("Category")
 plt.ylabel("Sales")
 plt.show()
-OUTPUT: image
 
-Explanation
+**OUTPUT:**
+<img width="566" height="393" alt="image" src="https://github.com/user-attachments/assets/eadd3f52-551d-4ada-b48a-6c6899d3c74b" />
+
+**Explanation**
+
 This bar chart visually compares total sales between Furniture, Office Supplies, and Technology.
 
 Analysis
 Technology has the highest sales compared with the other categories.
 
-15. Profit by Category
+**15. Profit by Category**
 sns.barplot(
     data=df,
     x="Category",
@@ -148,10 +155,13 @@ plt.title("Profit by Category")
 plt.xlabel("Category")
 plt.ylabel("Profit")
 plt.show()
-OUTPUT:
 
-image
-Explanation
+**OUTPUT:**
+
+<img width="571" height="455" alt="image" src="https://github.com/user-attachments/assets/d38be332-c39d-4997-bb03-1e40f11c4f94" />
+
+**Explanation**
+
 This Seaborn bar plot compares Profit across different product categories.
 
 x="Category" displays categories on the X-axis.
@@ -160,7 +170,7 @@ sns.barplot() creates the bar plot.
 Analysis
 This visualization helps compare the profitability of different product categories.
 
-16. Sales Distribution by Category
+**16. Sales Distribution by Category**
 sns.barplot(
     data=df,
     x="Category",
@@ -169,9 +179,12 @@ sns.barplot(
 
 plt.title("Sales Distribution by Category")
 plt.show()
-OUTPUT: image
 
-Explanation
+**OUTPUT:**
+<img width="571" height="455" alt="image" src="https://github.com/user-attachments/assets/4753581f-30a5-4324-8494-0d65ebe77322" />
+
+**Explanation**
+
 This bar plot compares sales across different product categories.
 
 data=df uses the retail sales dataset.
@@ -181,8 +194,9 @@ sns.barplot() creates the bar plot.
 Analysis
 This visualization helps identify which product category has higher sales.
 
-Part 2: Box Plots
-17. Profit Distribution
+**Part 2: Box Plots
+17. Profit Distribution**
+
 sns.boxplot(
     data=df,
     y="Profit"
@@ -191,10 +205,13 @@ sns.boxplot(
 plt.title("Profit Distribution")
 plt.ylabel("Profit")
 plt.show()
-OUTPUT:
 
-image
-Explanation
+**OUTPUT:**
+
+<img width="592" height="416" alt="image" src="https://github.com/user-attachments/assets/b0cda38f-6486-47e2-9fcb-70ab28ba360c" />
+
+**Explanation**
+
 This box plot shows the overall distribution of profit values.
 
 It helps identify:
@@ -206,7 +223,7 @@ Outliers
 Analysis
 This visualization helps understand how profit values are distributed and whether there are unusual profit values.
 
-18. Profit Variation Across Categories
+**18. Profit Variation Across Categories**
 sns.boxplot(
     data=df,
     x="Category",
@@ -217,9 +234,12 @@ plt.title("Profit Variation Across Categories")
 plt.xlabel("Category")
 plt.ylabel("Profit")
 plt.show()
-OUTPUT: image
 
-Explanation
+**OUTPUT:**
+<img width="592" height="455" alt="image" src="https://github.com/user-attachments/assets/baead3e9-64fe-47eb-8597-9f6a81f7bf54" />
+
+**Explanation**
+
 This box plot compares profit distribution across different product categories.
 
 x="Category" displays categories on the X-axis.
@@ -228,8 +248,9 @@ Each box represents the profit distribution of a category.
 Analysis
 This visualization helps compare profitability, variation, median values, and outliers across categories.
 
-Part 3: Discount vs Profit Analysis
-19. Checking Discount Levels
+**Part 3: Discount vs Profit Analysis
+19. Checking Discount Levels**
+
 df["Discount"].unique()
 Explanation
 This code displays all the unique discount levels available in the dataset.
@@ -237,7 +258,7 @@ This code displays all the unique discount levels available in the dataset.
 Analysis
 It helps identify the different discount values used in the sales records.
 
-20. Impact of Discount on Profit
+**20. Impact of Discount on Profit**
 sns.scatterplot(
     data=df,
     x="Discount",
@@ -246,9 +267,12 @@ sns.scatterplot(
 
 plt.title("Impact of Discount on Profit")
 plt.show()
-OUTPUT: image
 
-Explanation
+**OUTPUT:**
+<img width="592" height="455" alt="image" src="https://github.com/user-attachments/assets/62b4d8ce-e086-4d94-9367-a9ade5d5563d" />
+
+**Explanation**
+
 This scatter plot is used to analyze the relationship between Discount and Profit.
 
 x="Discount" represents the discount level.
@@ -260,24 +284,24 @@ The visualization helps understand how profit changes at different discount leve
 
 It can be used to identify whether higher discounts are associated with lower profit and to observe the impact of discounting on profitability.
 
-Part 4: Correlation Heatmap
-21. Selecting Numerical Attributes
+**Part 4: Correlation Heatmap
+21. Selecting Numerical Attributes**
 numeric_df = df.select_dtypes(
     include="number"
 )
-Explanation
+**Explanation**
 This code selects only the numerical columns from the dataset.
 
 Numerical attributes are required for correlation analysis because correlation is calculated between numerical variables.
 
-22. Creating Correlation Matrix
+**22. Creating Correlation Matrix**
 corr = numeric_df.corr()
-Explanation
+**Explanation**
 The corr() function calculates the correlation between all selected numerical attributes.
 
 Correlation shows the strength and direction of the relationship between numerical variables.
 
-23. Correlation Heatmap
+**23. Correlation Heatmap**
 sns.heatmap(
     corr,
     annot=True
@@ -285,9 +309,12 @@ sns.heatmap(
 
 plt.title("Correlation Heatmap")
 plt.show()
-OUTPUT: image
 
-Explanation
+**OUTPUT:**
+<img width="609" height="518" alt="image" src="https://github.com/user-attachments/assets/36a685f7-38b2-4f87-b9d2-8bcc83161e54" />
+
+**Explanation**
+
 This heatmap provides a visual representation of the correlation matrix.
 
 corr contains the calculated correlation values.
@@ -296,7 +323,7 @@ sns.heatmap() creates the heatmap.
 Analysis
 The correlation heatmap helps identify relationships between numerical attributes such as Sales, Quantity, Discount, and Profit.
 
-24. Overall Analysis
+**24. Overall Analysis**
 The project uses bar plots, box plots, scatter plots, and a correlation heatmap to analyze retail sales data.
 
 The analysis focuses on:
@@ -311,7 +338,7 @@ Impact of discount on profit
 Correlation between numerical attributes
 Delivery duration using Delivery Days
 
-25. Business Insights
+**25. Business Insights**
 Technology has the highest total sales among the three categories.
 Sales performance varies across different categories.
 Profit distribution contains variation and outliers.
@@ -320,7 +347,7 @@ Different discount levels can have different effects on profit.
 Higher discounts may affect profitability and should be analyzed carefully.
 Correlation analysis helps identify relationships between numerical business attributes.
 
-27. Conclusion
+**26. Conclusion**
 This project demonstrates how Python, Pandas, Matplotlib, and Seaborn can be used for retail sales analysis.
 
 The project covers data loading, data exploration, preprocessing, sales analysis, bar plots, box plots, discount versus profit analysis, and correlation heatmap analysis.
