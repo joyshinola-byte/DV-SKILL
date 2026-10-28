@@ -21,6 +21,7 @@ and identify high-value locations for real-estate investment.
 4. Generated a real-estate investment summary report showing the top 5 high-value locations based on median house price.
 
 **Result**
+
 House price distributions and geographic patterns were visualized successfully. 
 High-value locations were identified based on median house prices to support real-estate investment analysis.
 
